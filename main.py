@@ -9,6 +9,18 @@ import hashlib
 
 PAYLOAD = json.loads(base64.b64decode(sys.argv[1]))
 
+
+def torrent2magnet(torrent_url):
+  response = urllib2.urlopen(torrent_url)
+  torrent = response.read()
+  metadata = bencode.bdecode(torrent)
+  hashcontents = bencode.bencode(metadata['info'])
+  digest = hashlib.sha1(hashcontents).digest()
+  b32hash = base64.b32encode(digest)
+  magneturl = 'magnet:?xt=urn:btih:' + b32hash  + '&dn=' + metadata['info']['name']
+  return magneturl
+
+
 def search(query):
     response = urllib2.urlopen("http://www.newpct.com/buscar-descargas/%s" % urllib.quote_plus(query))
     data = response.read()
@@ -33,18 +45,6 @@ def search_movie(imdb_id, name, year):
     response = urllib2.urlopen("http://www.myapifilms.com/imdb?idIMDB=%s&lang=es-es" % urllib.quote_plus(imdb_id))
     data = json.load(response)
     return search(data['title'])
-
-
-def torrent2magnet(torrent_url):
-  response = urllib2.urlopen(torrent_url)
-  torrent = response.read()
-  metadata = bencode.bdecode(torrent)
-  hashcontents = bencode.bencode(metadata['info'])
-  digest = hashlib.sha1(hashcontents).digest()
-  b32hash = base64.b32encode(digest)
-  magneturl = 'magnet:?xt=urn:btih:' + b32hash  + '&dn=' + metadata['info']['name']
-  return magneturl
-
 
 urllib2.urlopen(
     PAYLOAD["callback_url"],
