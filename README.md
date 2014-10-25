@@ -1,14 +1,10 @@
 Introduction
 ===================
-This is a sample dummy provider for Pulsar.
+This is a NEWPCT provider for Pulsar.
 
 **PLEASE NOTE THAT THIS IS SUBJECT TO CHANGE QUITE HEAVILY**
 
-When Pulsar wants to find a stream for a media, it will call all the providers installed on the locally running XBMC instance.
-
-To be recognized as a Pulsar provider, the addon's name has to start with `script.pulsar.`.
-
-Pulsar will round up all the matching addons and call them using `XBMC.RunAddon()`.
+This a WorkInProgres provider and it's not finished. 
 
 
 Payload
