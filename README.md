@@ -1,3 +1,5 @@
+**:no_entry: [DEPRECATED]**
+
 Introduction
 ===================
 This is a NEWPCT provider for Pulsar, it only searches content in Spanish from Spain not Spanish from Latin America.
